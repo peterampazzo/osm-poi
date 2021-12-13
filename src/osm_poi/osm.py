@@ -45,6 +45,33 @@ def load_file(filename: str) -> gpd.GeoDataFrame:
     return data
 
 
+def remove_labels(filename: str) -> None:
+    directory = os.path.dirname(filename)
+    filename = os.path.basename(filename).split(".")[0]
+
+    data: Dict[str, List[Any]] = {"features": [], "nodes": {}, "ways": {}}
+
+    for key in data:
+        with open(f"{directory}/{filename}-{key}.json") as f:
+            data[key] = json.load(f)
+            logging.info(f"Loaded file {directory}/{filename}-{key}.json")
+
+    for polygon in data["features"]:
+        for node in list(polygon["nodes"]):
+            if node not in data["nodes"]:
+                del polygon["nodes"][node]
+        for way in list(polygon["ways"]):
+            if way not in data["ways"]:
+                del polygon["ways"][way]
+
+    for key in data:
+        with open(f"{directory}/{filename}-{key}.json", "w") as write_file:
+            json.dump(data[key], write_file)
+            logging.info(f"Dumped file {directory}/{filename}-{key}.json")
+
+    logging.info(f"Completed.")
+    
+
 def download(filename: str, label: str = None) -> None:
     gdf = load_file(filename)
     api = OSM()

@@ -1,7 +1,7 @@
 import logging
 import sys
 import argparse
-from osm_poi.osm import download
+from osm_poi.osm import download, remove_labels
 
 
 def main():
@@ -29,5 +29,6 @@ def main():
     if profile == "query":
         logging.info(f"Running process query loading file {args.filename}")
         download(args.filename)
-    if profile == "clean":
-        pass
+    if profile == "filter":
+        logging.info(f"Running process filter loading file {args.filename}")
+        remove_labels(args.filename)
