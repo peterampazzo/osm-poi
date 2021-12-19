@@ -1,5 +1,16 @@
 # OpenStreetMap POIs
 
+This Python package allows to query OpenStreetMap API using OverPy and retrieve all nodes and ways included in a area. It is possible to load a list of polygons using GeoPandas (JSON, GeoJSON, Shapefile are supported) and loop through them.
+
+The goal is to associate for every area a list of POIs retrived from OpenStreetMap.
+
+The query will be performed on the bounding box built around the given polygon.
+
+![](bounding-box.png)
+
+Two example files are provided: a [grid](https://github.com/peterampazzo/osm-poi/blob/main/example/grid.json) and a [polygon](https://github.com/peterampazzo/osm-poi/blob/main/example/polygon.geojson) over the city of Padova.
+The grid has been generated using the [GeoJSON Grid Creator](https://cityofaustin.github.io/geojson-grid/) developed by the city of Austin.
+
 To install:
 
 ```
