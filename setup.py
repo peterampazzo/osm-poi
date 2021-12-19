@@ -3,7 +3,7 @@ from os import path
 
 this_directory = path.abspath(path.dirname(__file__))
 
-devel = ["black", "mypy"]
+devel = ["black", "mypy", "pre-commit"]
 
 setuptools.setup(
     name="OpenStreetMap POI",
@@ -15,11 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(where="src"),
     package_dir={"": "src"},
     python_requires=">=3.8",
-    install_requires=["geopandas", "overpy", "shapely"],
+    install_requires=["geopandas", "overpy", "shapely", "pyhocon"],
     extras_require={"devel": devel},
-    entry_points={
-        "console_scripts": [
-            "osm_poi = osm_poi.main:main",
-        ],
-    },
+    entry_points={"console_scripts": ["osm_poi = osm_poi.main:main"]},
 )
