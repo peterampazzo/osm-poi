@@ -11,7 +11,7 @@ The query will be performed on the bounding box built around the given polygon.
 Two example files are provided: a [grid](https://github.com/peterampazzo/osm-poi/blob/main/example/grid.json) and a [polygon](https://github.com/peterampazzo/osm-poi/blob/main/example/polygon.geojson) over the city of Padova.
 The grid has been generated using the [GeoJSON Grid Creator](https://cityofaustin.github.io/geojson-grid/) developed by the city of Austin.
 
-To install:
+## Installation
 
 ```
 virtualenv env
@@ -19,11 +19,21 @@ source env/bin/activate
 pip install -e ".[devel]"
 ```
 
-Two profile are currently supported `query` and `filter`.
-1. The first profile query all the nodes and ways from OSM within the polygons included in the file passed.
-2. The second profile remove keys if they have been removed from the two main lists (`-nodes.json` and `-ways.json`) generated from the previous step.
+## Quick Start
+
+Two profile currently supported are `query` and `filter`.
+
+
+| **profile**  | **command** | **description**  |
+|---|---|---|
+| query | `osm_poi query <path_with_filename> --label <label_name>`  | Query all the nodes and ways from OSM within the polygons included in the file passed. _args_: <ul><li>`path`</li><li>`--label` (optional)</li></ul>  |
+| filter | `osm_poi filter <path_with_filename>` | Remove keys if they have been removed from the two main lists (`-nodes.json` and `-ways.json`) generated from the previous step. _args_: <ul><li>`path`</li></ul> |
 
 To test the behaviour an example file is provided:
 ```
+# grid.json
 osm_poi query example/grid.json
+
+# polygon
+osm_poi query example/polygon.geojson
 ```
